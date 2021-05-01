@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/news.dart';
 import '../../widgets/primary_card.dart';
+import '../read_news_view.dart';
 
 class TrendingTabView extends StatelessWidget {
   @override
@@ -14,7 +15,15 @@ class TrendingTabView extends StatelessWidget {
         var _trendingNews = trendingList[index];
 
         return InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ReadNews(
+                  news: _trendingNews,
+                ),
+              ),
+            );
+          },
           child: Container(
             width: double.infinity,
             height: 300.0,

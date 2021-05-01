@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/constants.dart';
+import '../../views/read_news_view.dart';
 import '../../models/news.dart';
 import '../../widgets/primary_card.dart';
 import '../../widgets/secondary_card.dart';
@@ -21,7 +22,15 @@ class PopularTabView extends StatelessWidget {
               itemBuilder: (context, index) {
                 var _popularNews = popularList[index];
                 return InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ReadNews(
+                          news: _popularNews,
+                        ),
+                      ),
+                    );
+                  },
                   child: Container(
                     margin: EdgeInsets.only(
                       right: 12.0,
@@ -53,7 +62,15 @@ class PopularTabView extends StatelessWidget {
             itemBuilder: (context, index) {
               var _recentNews = recentList[index];
               return InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ReadNews(
+                        news: _recentNews,
+                      ),
+                    ),
+                  );
+                },
                 child: Container(
                   width: double.infinity,
                   height: 135.0,
