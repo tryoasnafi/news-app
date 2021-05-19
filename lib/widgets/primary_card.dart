@@ -46,7 +46,9 @@ class PrimaryCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
                   image: DecorationImage(
-                    image: NetworkImage(news.image),
+                    image: (news.image != "")
+                        ? NetworkImage(news.image)
+                        : AssetImage('assets/default-image-placeholder.png'),
                     fit: BoxFit.cover,
                   ),
                 ),

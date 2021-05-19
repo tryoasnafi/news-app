@@ -22,10 +22,13 @@ class SecondaryCard extends StatelessWidget {
             height: 135,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.0),
-              image: DecorationImage(
-                image: NetworkImage(news.image),
-                fit: BoxFit.cover,
-              ),
+            ),
+            child: FadeInImage(
+              placeholder: AssetImage('assets/default-image-placeholder.png'),
+              image: (news.image != "")
+                  ? NetworkImage(news.image)
+                  : AssetImage('assets/default-image-placeholder.png'),
+              fit: BoxFit.cover,
             ),
           ),
           Expanded(
@@ -62,7 +65,7 @@ class SecondaryCard extends StatelessWidget {
                         backgroundColor: kGrey1,
                       ),
                       SizedBox(width: 8.0),
-                      Text("${news.estimate} min read")
+                      Text("${news.estimate} min read"),
                     ],
                   ),
                 ],
