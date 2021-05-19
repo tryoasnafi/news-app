@@ -26,20 +26,22 @@ class News {
   });
 
   static int countReadingTime(content) {
-    final String _content = content;
-    final int _numberOfWords = new RegExp(r"\s").allMatches(_content).length;
-    final int _readTime = (_numberOfWords / 250).ceil();
-    return _readTime;
+    if (content != null) {
+      final int _numberOfWords = new RegExp(r"\s").allMatches(content).length;
+      final int _readTime = (_numberOfWords / 250).ceil();
+      return _readTime;
+    }
+    return 0;
   }
 
   factory News.fromJson(Map<String, dynamic> json) {
     return News(
-      author: json['author'] as String,
-      title: json['title'] as String,
-      subtitle: json['description'] as String,
-      image: json['urlToImage'] as String,
-      content: json['content'] as String,
-      time: json['publishedAt'] as String,
+      author: json['author'] ?? "",
+      title: json['title'] ?? "",
+      subtitle: json['description'] ?? "",
+      image: json['urlToImage'] ?? "",
+      content: json['content'] ?? "",
+      time: json['publishedAt'] ?? "",
       category: 'RANDOM',
       estimate: countReadingTime(json['content']).toString(),
       favorite: (Random().nextDouble() + Random().nextInt(15) + 1)
