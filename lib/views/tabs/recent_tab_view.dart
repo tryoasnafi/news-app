@@ -10,12 +10,18 @@ class RecentTabView extends StatefulWidget {
 }
 
 class _RecentTabViewState extends State<RecentTabView> {
-  ApiService client = ApiService();
+  Future<List<News>> fetchNews;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchNews = ApiService().fetchNews();
+  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: client.fetchNews(),
+      future: fetchNews,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<News> news = snapshot.data;
