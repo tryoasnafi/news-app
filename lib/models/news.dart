@@ -25,6 +25,13 @@ class News {
     this.title,
   });
 
+  static int countReadingTime(content) {
+    final String _content = content;
+    final int _numberOfWords = new RegExp(r"\s").allMatches(_content).length;
+    final int _readTime = (_numberOfWords / 250).ceil();
+    return _readTime;
+  }
+
   factory News.fromJson(Map<String, dynamic> json) {
     return News(
       author: json['author'] as String,
@@ -34,7 +41,7 @@ class News {
       content: json['content'] as String,
       time: json['publishedAt'] as String,
       category: 'RANDOM',
-      estimate: (Random().nextInt(15) + 1).toString(),
+      estimate: countReadingTime(json['content']).toString(),
       favorite: (Random().nextDouble() + Random().nextInt(15) + 1)
               .toStringAsFixed(1) +
           'k',
