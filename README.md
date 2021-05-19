@@ -10,5 +10,8 @@ My Learning Apps about UI Flutter
 | Recent News | <img src="screenshot/recent-tab.png" width="200rem" /> |
 | Read News | <img src="screenshot/detail-post.png" width="200rem" /> |
 
+## REST API
+In this project, I use API from NewsAPI : [https://newsapi.org/](https://newsapi.org/)
+
 ## Credit
 Thanks to Youtube Channel: [Byneet Dev](https://www.youtube.com/channel/UCxJInPa5SMldFHfJreSJ73Q)
