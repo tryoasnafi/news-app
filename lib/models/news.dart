@@ -34,6 +34,33 @@ class News {
     return 0;
   }
 
+  static String publishedAt(String time) {
+    DateTime publishedTime = DateTime.tryParse(time);
+    DateTime currentTime = DateTime.now();
+
+    int publishedTimestamp = publishedTime.millisecondsSinceEpoch;
+    int currentTimestamp = currentTime.millisecondsSinceEpoch;
+
+    int secondSincePublished = (currentTimestamp - publishedTimestamp) ~/ 1000;
+
+    String publishedAt = "";
+
+    if (secondSincePublished >= 86400) {
+      var daySincePublished = secondSincePublished ~/ 86400;
+      publishedAt = "$daySincePublished hari lalu";
+    } else if (secondSincePublished >= 3600) {
+      var hourSincePublished = secondSincePublished ~/ 3600;
+      publishedAt = "$hourSincePublished jam lalu";
+    } else if (secondSincePublished >= 60) {
+      var minuteSincePublished = secondSincePublished ~/ 60;
+      publishedAt = "$minuteSincePublished menit lalu";
+    } else {
+      publishedAt = "1 menit lalu";
+    }
+
+    return publishedAt;
+  }
+
   factory News.fromJson(Map<String, dynamic> json) {
     return News(
       author: json['author'] ?? "",
@@ -41,7 +68,7 @@ class News {
       subtitle: json['description'] ?? "",
       image: json['urlToImage'] ?? "",
       content: json['content'] ?? "",
-      time: json['publishedAt'] ?? "",
+      time: publishedAt(json['publishedAt']) ?? "",
       category: 'RANDOM',
       estimate: countReadingTime(json['content']).toString(),
       favorite: (Random().nextDouble() + Random().nextInt(15) + 1)
