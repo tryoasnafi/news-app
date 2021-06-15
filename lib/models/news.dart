@@ -73,7 +73,7 @@ class News {
       image: json['urlToImage'] ?? "",
       content: json['content'] ?? "",
       time: publishedAt(json['publishedAt']) ?? "",
-      category: 'RANDOM',
+      category: json['source']['name'] ?? "",
       estimate: countReadingTime(json['content']).toString(),
       favorite:
           "${(Random().nextDouble() + Random().nextInt(15) + 1).toStringAsFixed(1)} k",
