@@ -31,7 +31,8 @@ class News {
       final int _readTime = (_numberOfWords / 250).ceil();
       return _readTime;
     }
-    return 0;
+    // Default: 1 min
+    return 1;
   }
 
   static String publishedAt(String time) {
@@ -42,23 +43,26 @@ class News {
     int currentTimestamp = currentTime.millisecondsSinceEpoch;
 
     int secondSincePublished = (currentTimestamp - publishedTimestamp) ~/ 1000;
+    int interval = 0;
 
-    String publishedAt = "";
-
-    if (secondSincePublished >= 86400) {
-      var daySincePublished = secondSincePublished ~/ 86400;
-      publishedAt = "$daySincePublished hari lalu";
+    if (secondSincePublished >= 31536000) {
+      interval = secondSincePublished ~/ 31536000;
+      return (interval == 1) ? "1 year ago" : "$interval years ago";
+    } else if (secondSincePublished >= 2592000) {
+      interval = secondSincePublished ~/ 2592000;
+      return (interval == 1) ? "1 month ago" : "$interval months ago";
+    } else if (secondSincePublished >= 86400) {
+      interval = secondSincePublished ~/ 86400;
+      return (interval == 1) ? "1 day ago" : "$interval days ago";
     } else if (secondSincePublished >= 3600) {
-      var hourSincePublished = secondSincePublished ~/ 3600;
-      publishedAt = "$hourSincePublished jam lalu";
+      interval = secondSincePublished ~/ 3600;
+      return (interval == 1) ? "1 hour ago" : "$interval hours ago";
     } else if (secondSincePublished >= 60) {
-      var minuteSincePublished = secondSincePublished ~/ 60;
-      publishedAt = "$minuteSincePublished menit lalu";
-    } else {
-      publishedAt = "1 menit lalu";
+      interval = secondSincePublished ~/ 60;
+      return (interval == 1) ? "1 minute ago" : "$interval minutes ago";
     }
 
-    return publishedAt;
+    return "1 minute ago";
   }
 
   factory News.fromJson(Map<String, dynamic> json) {
@@ -71,9 +75,8 @@ class News {
       time: publishedAt(json['publishedAt']) ?? "",
       category: 'RANDOM',
       estimate: countReadingTime(json['content']).toString(),
-      favorite: (Random().nextDouble() + Random().nextInt(15) + 1)
-              .toStringAsFixed(1) +
-          'k',
+      favorite:
+          "${(Random().nextDouble() + Random().nextInt(15) + 1).toStringAsFixed(1)} k",
       seen: (Random().nextInt(100) + 1).toString() + 'k',
     );
   }
