@@ -21,7 +21,7 @@ class HomeView extends StatelessWidget {
                   style: kNonActiveTabStyle,
                 ),
                 subtitle: Text(
-                  'Jessica Veranda',
+                  'Tryo Asnafi',
                   textAlign: TextAlign.end,
                   style: kActiveTabStyle,
                 ),
@@ -31,7 +31,7 @@ class HomeView extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     image: DecorationImage(
-                      image: AssetImage('assets/ve.jpg'),
+                      image: AssetImage('assets/avatar.jpg'),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -53,7 +53,7 @@ class HomeView extends StatelessWidget {
                   ),
                   tabs: [
                     Tab(
-                      text: 'Popular',
+                      text: 'Headlines',
                     ),
                     Tab(
                       text: 'Trending',
